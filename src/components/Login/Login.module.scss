@@ -1,10 +1,19 @@
 .login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  color: #f0f0f0;
   position: absolute;
   top: 50px;
   left: 50%;
   transform: translateX(-50%);
 
   &__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ffffff;
     background-color: none;
     display: flex;
     justify-content: center;
@@ -13,36 +22,28 @@
 
   &__container {
     display: flex;
-    flex-direction: row;
-    margin-top: 20px;
-  }
-
-  &__button {
-    font-size: 1rem;
-    border: none;
-    background-color: #cc625e;
-    color: #fff;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: #de7b78;
-    }
-
-    &:active {
-      background-color: #e6918e;
-    }
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background-color: #333344;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
   }
 
   &__input {
+    color: #ffffff;
+    border-radius: 4px;
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
     cursor: pointer;
     caret-color: red;
     font-size: 1.5rem;
     border: none;
-    background-color: darkgray;
-    margin-right: 10px;
-    margin-left: 10px;
+    background-color: #333344;
 
-    &:placeholder {
+    &::placeholder {
       border-bottom: 2px solid #262b30;
       text-align: center;
       font-size: 18px;
@@ -53,6 +54,26 @@
       border-bottom: #000;
       border-color: none;
       outline: none;
+    }
+  }
+
+  &__button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #d9534f;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #c9302c;
+    }
+
+    &:active {
+      background-color: #e6918e;
     }
   }
 }
