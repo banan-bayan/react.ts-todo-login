@@ -5,6 +5,7 @@ import TodoList from "../TodoList/TodoList";
 import TodoSectionButtons from "../TodoSectionButtons/TodoSectionButtons";
 import { TaskType, ButtonSectionDataType, EStatusType } from "../../Types";
 import useAppNavigate from "../../hooks/useAppNavigate";
+import trashIcom from '../../assets/trash.svg';
 
 const App = () => {
   const getInitialTasks = (): TaskType[] => {
@@ -115,7 +116,7 @@ const App = () => {
         />
         <TodoList
           completeNameBtn="✓"
-          deletedNameBtn="🗑️"
+          trashIcom={trashIcom}
           tasks={applyFilter(activeButtonId)}
           changeStatusOnCompletedHandler={changeStatusOnCompletedHandler}
           changeStatusOnDeletedHandler={changeStatusOnDeletedHandler}

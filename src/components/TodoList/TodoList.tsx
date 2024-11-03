@@ -7,21 +7,21 @@ interface TodoListProps {
   changeStatusOnCompletedHandler: (id: number) => void;
   changeStatusOnDeletedHandler: (id: number) => void;
   completeNameBtn: string;
-  deletedNameBtn: string;
+  trashIcom: string;
 }
 const TodoList = ({
   tasks,
   changeStatusOnCompletedHandler,
   changeStatusOnDeletedHandler,
   completeNameBtn,
-  deletedNameBtn,
+  trashIcom,
 }: TodoListProps) => {
   return (
     <ul className={classes.todoList}>
       {tasks.map(({ id, text, status }) => {
         return (
           <TodoItem
-            deletedNameBtn={deletedNameBtn}
+          trashIcom={trashIcom}
             completeNameBtn={completeNameBtn}
             key={id}
             status={status}
