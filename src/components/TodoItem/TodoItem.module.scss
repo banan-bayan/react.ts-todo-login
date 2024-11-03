@@ -1,0 +1,48 @@
+.todoItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0px;
+  border: 1px solid white;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  font-size: 1.3rem;
+  padding: 5px;
+  padding-left: 10px;
+  background-color: gray;
+  height: 60px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    color: grey;
+    background-color: #e0e0e0;
+  }
+
+  &__text {
+    display: flex;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-grow: 1;
+    padding-left: 5px;
+    align-items: center;
+  }
+
+  &__button {
+    height: 40px;
+    color: lightgreen;
+    font-size: 1rem;
+    margin-left: 5px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      color: green;
+      border-bottom: 2px solid #5e88cc;
+    }
+  }
+}
+
+
+.todoItem:hover .todoItem__button {
+  background-color: #e0e0e0;
+}
