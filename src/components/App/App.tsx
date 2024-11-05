@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import classes from "./App.module.scss";
 import InputSection from "../InputSection/InputSection";
 import TodoList from "../TodoList/TodoList";
@@ -19,13 +19,19 @@ import {
 
 const App = () => {
   const isAuth = localStorage.getItem("isAuthenticated") === "true";
+  const savedActiveTaskId = Number(localStorage.getItem("activeTaskId")) || 2;
 
   useAppNavigate(isAuth);
 
   const dispatch = useAppDispatch();
   const tasks = useAppSelector((state) => state.tasks);
   const [inputValue, setInputValue] = useState<string>("");
-  const [activeButtonId, setActiveButtonId] = useState<number>(2);
+  const [activeButtonId, setActiveButtonId] = useState<number>(savedActiveTaskId);
+  const [filteredTasks, setFilteredTasks] = useState<TaskType[]>([]);
+
+  useEffect(() => {
+    setFilteredTasks(applyFilter(activeButtonId));
+  }, [tasks, activeButtonId]);
 
   const addTask = () => {
     if (inputValue.trim()) {
@@ -71,6 +77,13 @@ const App = () => {
     dispatch(changeTaskStatusOnDeleted({ id: taskId }));
   };
 
+  const handleFilterChange = (filterId: number) => {
+    if (filterId !== activeButtonId) {
+      setActiveButtonId(filterId);
+      localStorage.setItem("activeTaskId", String(filterId));
+    }
+  };
+
   const buttonsData: ButtonSectionDataType[] = [
     { id: 1, name: "ТЕКУЩИЕ ДЕЛА" },
     { id: 2, name: "ВСЕ ДЕЛА" },
@@ -93,7 +106,7 @@ const App = () => {
       />
       <main className={classes.main}>
         <TodoSectionButtons
-          getFilterTasks={setActiveButtonId}
+          getFilterTasks={handleFilterChange}
           activeTasksCount={`(${activeTasksCount})`}
           allTasksCount={`(${tasks.length})`}
           activeButtonId={activeButtonId}
@@ -102,7 +115,7 @@ const App = () => {
         <TodoList
           completeNameBtn="✓"
           trashIcon={trashIcon}
-          tasks={applyFilter(activeButtonId)}
+          tasks={filteredTasks}
           changeStatusOnCompletedHandler={changeStatusOnCompletedHandler}
           changeStatusOnDeletedHandler={changeStatusOnDeletedHandler}
         />
