@@ -7,7 +7,7 @@ interface TodoItemProps {
   changeStatusOnCompletedHandler: () => void;
   changeStatusOnDeletedHandler: () => void;
   completeNameBtn: string;
-  trashIcom: string;
+  trashIcon: string;
   status: string;
 }
 
@@ -16,7 +16,7 @@ const TodoItem = ({
   changeStatusOnCompletedHandler,
   changeStatusOnDeletedHandler,
   completeNameBtn,
-  trashIcom,
+  trashIcon,
   status,
 }: TodoItemProps) => {
 
@@ -35,7 +35,7 @@ const TodoItem = ({
             className={classes.todoItem__button}
             clickHandler={changeStatusOnDeletedHandler}
           >
-            <img className={classes.todoItem__img} src={trashIcom} alt="Корзина" />
+            <img className={classes.todoItem__img} src={trashIcon} alt="Корзина" />
           </Button>
         </>
       )}
