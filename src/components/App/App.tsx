@@ -6,21 +6,26 @@ import TodoSectionButtons from "../TodoSectionButtons/TodoSectionButtons";
 import { TaskType, ButtonSectionDataType, EStatusType } from "../../Types";
 import useAppNavigate from "../../hooks/useAppNavigate";
 import trashIcom from "../../assets/trash.svg";
-import { useAppDispatch, useAppSelector } from "../../hooks/UseAppDispatchUseAppSelector";
-import { addTaskStore, clearTasksStore, changeTaskStatusOnCompleted, changeTaskStatusOnDeleted } from "../../store/tasksSlice";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../hooks/UseAppDispatchUseAppSelector";
+import {
+  addTaskStore,
+  clearTasksStore,
+  changeTaskStatusOnCompleted,
+  changeTaskStatusOnDeleted,
+} from "../../store/tasksSlice";
 
 const App = () => {
-
   const isAuth = localStorage.getItem("isAuthenticated") === "true";
 
   useAppNavigate(isAuth);
-  
+
   const dispatch = useAppDispatch();
   const tasks = useAppSelector((state) => state.tasks);
   const [inputValue, setInputValue] = useState<string>("");
   const [activeButtonId, setActiveButtonId] = useState<number>(2);
-
-
 
   const addTask = () => {
     if (inputValue.trim()) {
@@ -37,7 +42,9 @@ const App = () => {
 
   const clearTasks = () => dispatch(clearTasksStore());
 
-  const activeTasksCount = tasks.filter((t: TaskType) => t.status === EStatusType.active).length;
+  const activeTasksCount = tasks.filter(
+    (t: TaskType) => t.status === EStatusType.active
+  ).length;
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -46,22 +53,22 @@ const App = () => {
   const applyFilter = (filterId: number): TaskType[] => {
     switch (filterId) {
       case 1:
-        return tasks.filter(({ status }) => status === EStatusType.active);
+        return tasks.filter(({ status }: TaskType) => status === EStatusType.active);
       case 3:
-        return tasks.filter(({ status }) => status === EStatusType.completed);
+        return tasks.filter(({ status }: TaskType) => status === EStatusType.completed);
       case 4:
-        return tasks.filter(({ status }) => status === EStatusType.deleted);
+        return tasks.filter(({ status }: TaskType) => status === EStatusType.deleted);
       default:
         return tasks;
     }
   };
 
   const changeStatusOnCompletedHandler = (taskId: number) => {
-     dispatch(changeTaskStatusOnCompleted({id: taskId}));
+    dispatch(changeTaskStatusOnCompleted({ id: taskId }));
   };
 
   const changeStatusOnDeletedHandler = (taskId: number) => {
-    dispatch(changeTaskStatusOnDeleted({id: taskId}));
+    dispatch(changeTaskStatusOnDeleted({ id: taskId }));
   };
 
   const buttonsData: ButtonSectionDataType[] = [
@@ -77,7 +84,6 @@ const App = () => {
         placeholderInput="Пополнить список ..."
         keyPressHandler={handleKeyDown}
         handlerInput={handleInput}
-        
         addTaskHandler={addTask}
         clearAllTasks={clearTasks}
         buttonAddTaskName="+ ДОБАВИТЬ"
